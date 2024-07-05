@@ -11,7 +11,10 @@ export function Chat() {
   const [messages, setMessages] = useState([
     { id: 1, user: 'Michael', content: "Hey, how's it going? We should catch up sometime soon. 🙏", type: 'sent' },
     { id: 2, user: 'Sarah', content: "Sure, I'm free this weekend if you want to grab a coffee.", type: 'received' },
-    { id: 3, user: 'Michael', content: "Sounds good! Let's meet at the Starbucks on 5th Ave.", type: 'sent' },
+    { id: 3, user: 'Sarah', content: "Sure, I'm free this weekend if you want to grab a coffee.", type: 'received' },
+    { id: 4, user: 'Sarah', content: "Sure, I'm free this weekend if you want to grab a coffee.", type: 'received' },
+    { id: 5, user: 'Sarah', content: "Sure, I'm free this weekend if you want to grab a coffee.", type: 'received' },
+    { id: 6, user: 'Michael', content: "Sounds good! Let's meet at the Starbucks on 5th Ave.", type: 'sent' },
   ]);
 
   const handleSendMessage = (message: string) => {
