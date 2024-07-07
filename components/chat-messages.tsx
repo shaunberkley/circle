@@ -18,7 +18,7 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
   }, []);
 
   return (
-    <ul className="flex-1 overflow-auto p-4 space-y-6">
+    <ul className="flex-1 h-full overflow-auto p-4 space-y-6">
       {groupedMessages.map((group, index) => (
         <li key={index} className="flex flex-col gap-1">
           {group.type === 'received' && (
