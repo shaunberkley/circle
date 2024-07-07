@@ -15,7 +15,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "40px";
+      textareaRef.current.style.height = "44px";
       const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
       textareaRef.current.style.height = `${newHeight}px`;
     }
@@ -26,7 +26,9 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
       onSendMessage(message);
       setMessage('');
       if (textareaRef.current) {
-        textareaRef.current.style.height = "40px"; // Reset to initial height after sending
+        textareaRef.current.style.height = "44px";
+        const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
+        textareaRef.current.style.height = `${newHeight}px`;
       }
     }
   };
@@ -41,7 +43,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
   const handleExpand = () => {
     if (textareaRef.current && containerRef.current) {
       if (isExpanded) {
-        textareaRef.current.style.height = "40px";
+        textareaRef.current.style.height = "44px";
         const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
         textareaRef.current.style.height = `${newHeight}px`;
         containerRef.current.style.height = ""; // Reset container height
@@ -71,11 +73,11 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
         ref={textareaRef}
         id="message"
         placeholder="Type your message..."
-        className="flex-1 resize-none h-full"
+        className="flex-1 resize-none h-full bg-white text-base"
         autoComplete="off"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyUp={handleKeyPress}
         data-1p-ignore
       />
       <Button type="submit" size="icon" onClick={handleSendMessage}>
