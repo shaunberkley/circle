@@ -40,3 +40,9 @@
     @apply font-heading;
   }
 }
+
+@layer utilities {
+  .hd-screen {
+    height: 100dvh;
+  }
+}

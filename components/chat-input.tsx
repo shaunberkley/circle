@@ -57,7 +57,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
   };
 
   return (
-    <div className="relative p-3 flex items-end space-x-2 border-t" ref={containerRef}>
+    <div className="relative px-3 pt-6 pb-3 flex items-end space-x-2 border-t" ref={containerRef}>
       {isExpanded ? (
         <ChevronDownIcon
           className="absolute w-6 h-6 text-gray-400 -top-3 cursor-pointer left-0 right-0 mx-auto bg-white border rounded-full"
@@ -73,7 +73,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
         ref={textareaRef}
         id="message"
         placeholder="Type your message..."
-        className="flex-1 resize-none h-full bg-white text-base"
+        className="flex-1 resize-none h-full bg-white text-base overflow-auto"
         autoComplete="off"
         value={message}
         onChange={(e) => setMessage(e.target.value)}

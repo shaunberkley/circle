@@ -28,7 +28,7 @@ export function Chat() {
   };
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex hd-screen w-full">
       <CircleList />
       <div className="w-full flex-1 flex flex-col">
         <ChatHeader />
