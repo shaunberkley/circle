@@ -25,7 +25,7 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
             <div className="text-sm px-3">{group.user}</div>
           )}
           {group.messages.map((message: any) => (
-            <div key={message.id} className={`flex w-fit sm:w-max max-w-[500px] flex-col gap-1 rounded-2xl px-3 py-1.5 text-sm ${group.type === 'sent' ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted'}`}>
+            <div key={message.id} className={`flex w-max sm:w-fit max-w-[80%] 2xl:max-w-[800px] flex-col gap-1 rounded-2xl px-3 py-1.5 text-sm ${group.type === 'sent' ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted'}`}>
               {message.content}
             </div>
           ))}
