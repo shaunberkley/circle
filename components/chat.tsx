@@ -29,13 +29,13 @@ export function Chat() {
 
   return (
     <div className="flex hd-screen w-full">
-      <CircleList />
-      <div className="w-full flex-1 flex flex-col">
+      <CircleList className="hidden lg:flex" />
+      <div className="w-full h-full flex-1 flex flex-col">
         <ChatHeader />
         <ChatMessages messages={messages} />
         <ChatInput onSendMessage={handleSendMessage} />
       </div>
-      <ContextBar />
+      <ContextBar className="hidden lg:flex" />
     </div>
   );
 }

@@ -4,10 +4,15 @@ import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ToggleMode } from "@/components/toggle-mode";
 import { PlusIcon } from "lucide-react";
+import { cn } from "../lib/utils";
 
-export function CircleList() {
+interface CircleListProps {
+  className?: string;
+}
+
+export function CircleList({ className }: CircleListProps) {
   return (
-    <div className="hidden lg:flex bg-muted/20 border-r w-64 p-4 flex-col gap-4">
+    <div className={cn("flex bg-muted/20 border-r w-64 p-4 flex-col gap-4", className)}>
       <div className="flex items-center justify-between">
         <div className="font-medium text-sm">Circles</div>
         <Button variant="ghost" size="icon" className="rounded-full w-8 h-8">

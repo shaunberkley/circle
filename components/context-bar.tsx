@@ -3,10 +3,15 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ArrowUpRightIcon, CalendarIcon, ClipboardListIcon, ClockIcon } from "lucide-react";
 import Link from "next/link";
+import { cn } from "../lib/utils";
 
-export function ContextBar() {
+interface ContextBarProps {
+  className?: string;
+}
+
+export function ContextBar({ className }: ContextBarProps) {
   return (
-    <div className="hidden lg:flex bg-muted/20 border-l w-64 p-4 flex-col gap-4">
+    <div className={cn("flex bg-muted/20 border-l w-64 p-4 flex-col gap-4", className)}>
       <div className="font-medium text-sm">Active Users</div>
       <div className="flex flex-col gap-2 overflow-auto">
         <div className="flex items-center gap-3">
