@@ -4,11 +4,11 @@ Traditional social media has evolved into a place to consume and create content,
 
 ## Tenets
 
-**-** ****Privacy First****: Your data is yours. We prioritize your privacy and ensure your information is not shared.
-**-** ****Meaningful Interactions****: Designed to enhance interactions with your close friends and family, not for meeting new people.
-**-** ****No Virality****: Content on Circle is for sharing within your circles, not for going viral.
-**-** ****Healthy Socialization****: Encourages healthy digital interactions, avoiding the pitfalls of traditional social media.
-**-** ****Focus on Real Connections****: Strengthening bonds with people who matter most to you
+* **Privacy First**: Your data is yours. We prioritize your privacy and ensure your information is not shared.
+* **Meaningful Interactions**: Designed to enhance interactions with your close friends and family, not for meeting new people.
+* **No Virality**: Content on Circle is for sharing within your circles, not for going viral.
+* **Healthy Socialization**: Encourages healthy digital interactions, avoiding the pitfalls of traditional social media.
+* **Focus on Real Connections**: Strengthening bonds with people who matter most to you
 
 Circle is an innovative social application designed to deepen connections with close friends and family. It offers a feature-rich platform to enhance communication and interaction within private groups. By incorporating timelines, topics, presence indicators, and more, Circle aims to create a meaningful and engaging social experience.
 
