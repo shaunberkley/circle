@@ -2,7 +2,7 @@
 
 Traditional social media has evolved into a place to consume and create content, often at the expense of genuine social interactions. Circle aims to redefine this by focusing on meaningful connections with close friends and family. While you can share content on Circle, it will never be a place where people go "viral." We prioritize privacy, do not share people's data, and strive to foster healthy digital social interactions with those who truly matter to you. Circle is not a platform to meet new people or check in on acquaintances; it's a space to strengthen your existing bonds.
 
-**## Tenets**
+## Tenets
 
 **-** ****Privacy First****: Your data is yours. We prioritize your privacy and ensure your information is not shared.
 **-** ****Meaningful Interactions****: Designed to enhance interactions with your close friends and family, not for meeting new people.
