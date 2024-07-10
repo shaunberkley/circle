@@ -15,9 +15,9 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "44px";
-      const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
-      textareaRef.current.style.height = `${newHeight}px`;
+    //   textareaRef.current.style.height = "44px";
+    //   const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
+    //   textareaRef.current.style.height = `${newHeight}px`;
     }
   }, [message]);
 
@@ -25,10 +25,12 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
     if (message.trim() !== '') {
       onSendMessage(message);
       setMessage('');
-      if (textareaRef.current) {
+      if (textareaRef.current && containerRef.current) {
         textareaRef.current.style.height = "44px";
         const newHeight = Math.min(textareaRef.current.scrollHeight, 300);
         textareaRef.current.style.height = `${newHeight}px`;
+        containerRef.current.style.height = ""; // Reset container height
+        setIsExpanded(false);
       }
     }
   };
