@@ -1,18 +1,12 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  onEnter?: () => void;
-}
+import { cn } from "@/lib/utils"
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, onEnter, ...props }, ref) => {
-    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter" && onEnter) {
-        onEnter();
-      }
-    };
-
+  ({ className, type, ...props }, ref) => {
     return (
       <input
         type={type}
@@ -21,14 +15,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         ref={ref}
-        onKeyUp={handleKeyUp}
         {...props}
-        data-1p-ignore
       />
-    );
+    )
   }
-);
+)
+Input.displayName = "Input"
 
-Input.displayName = "Input";
-
-export { Input };
+export { Input }
