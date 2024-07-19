@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { usePathname } from 'next/navigation'
-import { parse } from 'bowser'
+import Bowser from 'bowser'
 import { flatten } from 'flat'
 
 import { createClient } from '@/supabase/client'
@@ -41,7 +41,8 @@ const Statistics = ({ post }: StatisticsProps) => {
     async (values: StorageValues) => {
       const ip = await fetcher<IpAPI>('/api/ip')
       const ua = globalThis?.navigator.userAgent
-      const browser: Browser = flatten(parse(ua))
+      const browser = Bowser.getParser(ua)
+      const browserInfo: Browser = flatten(browser.getResult())
 
       const supabase = createClient()
       const { error } = await supabase.rpc('set_statistics', {
@@ -54,7 +55,7 @@ const Statistics = ({ post }: StatisticsProps) => {
           path: globalThis?.location.pathname,
           referrer: values?.referrer,
           ip,
-          browser,
+          browser: browserInfo,
           user_agent: ua,
         },
       })
