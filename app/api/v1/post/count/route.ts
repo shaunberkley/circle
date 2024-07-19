@@ -2,6 +2,10 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/supabase/server'
 import { ApiError, revalidates } from '@/lib/utils'
 import { authorize } from '@/queries/server/auth'
+import { Database } from '@/types/supabase'
+
+type CountPostsResult =
+  Database['public']['Functions']['count_posts']['Returns'][number]
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -32,7 +36,7 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  const defaultValues = [
+  const defaultValues: CountPostsResult[] = [
     { status: 'publish', count: 0 },
     { status: 'future', count: 0 },
     { status: 'draft', count: 0 },
@@ -42,20 +46,16 @@ export async function GET(request: NextRequest) {
   ]
 
   const data = defaultValues?.map((row) => {
-    return result?.data?.find((r) => r.status === row.status) ?? row
+    return (
+      result?.data?.find((r: CountPostsResult) => r.status === row.status) ??
+      row
+    )
   })
 
   const count = data?.reduce((acc, curr) => {
     if (curr.status === 'trash') return acc
     return acc + curr.count
   }, 0)
-
-  // const orderBy = ['publish', 'draft', 'pending', 'private', 'future', 'trash']
-  // const sorted = data.sort(
-  //   (a, b) => orderBy.indexOf(a.status) - orderBy.indexOf(b.status)
-  // )
-  // const sorted = data.sort((a, b) => (a.status > b.status ? 1 : -1)) // ASC
-  // const sorted = data.sort((a, b) => (a.status > b.status ? -1 : 1)) // DESC
 
   return NextResponse.json({ data, count, error: null })
 }

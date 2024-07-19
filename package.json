@@ -12,7 +12,7 @@
     "clean:cache": "rm -rf .next && npm cache clean --force && npm cache verify",
     "clean": "npm run clean:dir && npm run clean:cache",
     "reinstall": "npm run clean && npm install",
-    "gen-types": "supabase gen types --lang=typescript --linked > types/supabase.ts"
+    "gen-types": "supabase gen types --lang=typescript --project-id qjinjgzrtbqqprfmnwax --schema public > types/supabase.ts"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^6.2.0",
