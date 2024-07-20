@@ -63,3 +63,9 @@
     @apply overflow-hidden;
   }
 }
+
+@layer utilities {
+  .hd-screen {
+    height: 100dvh;
+  }
+}

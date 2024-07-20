@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Virtuoso } from 'react-virtuoso'
 import { Timeline } from './chat-timeline'
-import { Message } from '../../app/chat/page'
+import { Message } from '../page'
 
 interface DateMessage {
   type: 'date'
@@ -14,12 +14,16 @@ interface ChatMessagesProps {
   messages: Message[]
   onScrollToDate: (date: string) => void
   currentUser: string
+  currentUserSentMessage: boolean
+  setCurrentUserSentMessage: (value: boolean) => void
 }
 
-const formatDate = (date: Date) => {
-  return date.toLocaleDateString('en-US', {
+const formatDate = (date: Date | string) => {
+  const dateObj = typeof date === 'string' ? new Date(date) : date
+  return dateObj.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
+    day: 'numeric',
   })
 }
 
@@ -43,19 +47,24 @@ export function ChatMessages({
   messages,
   onScrollToDate,
   currentUser,
+  currentUserSentMessage,
+  setCurrentUserSentMessage,
 }: ChatMessagesProps) {
   const preparedMessages = prepareMessages(messages)
   const virtuosoRef = useRef<any>(null)
 
+  console.log('Rendered messages:', preparedMessages)
+
   useEffect(() => {
-    if (virtuosoRef.current) {
+    if (virtuosoRef.current && currentUserSentMessage) {
       virtuosoRef.current.scrollToIndex({
         index: preparedMessages.length - 1,
         align: 'end',
         behavior: 'auto',
       })
+      setCurrentUserSentMessage(false)
     }
-  }, [messages])
+  }, [preparedMessages, currentUserSentMessage, setCurrentUserSentMessage])
 
   const handleScrollToDate = (date: string) => {
     const index = preparedMessages.findIndex(
@@ -81,12 +90,12 @@ export function ChatMessages({
     }
     return (
       <div key={item.id} className="flex flex-col gap-1 py-2">
-        {item.user !== currentUser && (
-          <div className="mx-4 px-3 text-sm font-medium">{item.user}</div>
+        {item.user_id !== currentUser && (
+          <div className="mx-4 px-3 text-sm font-medium">{item.user_id}</div>
         )}
         <div
-          className={`mx-4 flex w-max max-w-[80%] flex-col gap-1 rounded-2xl px-3 py-1.5 text-sm sm:w-fit 2xl:max-w-[800px] ${item.user === currentUser ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted'}`}
-          aria-label={item.timestamp.toDateString()}
+          className={`mx-4 flex w-max max-w-[80%] flex-col gap-1 rounded-2xl px-3 py-1.5 text-sm sm:w-fit 2xl:max-w-[800px] ${item.user_id === currentUser ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted'}`}
+          aria-label={new Date(item.timestamp).toDateString()}
         >
           {item.content}
         </div>

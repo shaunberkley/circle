@@ -19,4 +19,4 @@ export {
   setQueryString,
 } from './url'
 export { getMeta, setMeta, compareTags } from './functions'
-export { generateRecentPosts } from './dummy-text'
+export { generateRecentPosts, generateRecentCircles } from './dummy-text'

@@ -30,13 +30,20 @@ export const dashboardConfig: DashboardConfig = {
     },
     {
       id: 2,
+      href: '/dashboard/circles',
+      text: 'Circles',
+      translate: 'yes',
+      iconName: 'Circle',
+    },
+    {
+      id: 3,
       href: '/dashboard/posts',
       text: 'posts',
       translate: 'yes',
       iconName: 'StickyNote',
     },
     {
-      id: 3,
+      id: 4,
       href: '/dashboard/media',
       text: 'media',
       translate: 'yes',
@@ -44,7 +51,7 @@ export const dashboardConfig: DashboardConfig = {
       disabled: true,
     },
     {
-      id: 4,
+      id: 5,
       href: '/dashboard/tags',
       text: 'tags',
       translate: 'yes',
@@ -52,14 +59,14 @@ export const dashboardConfig: DashboardConfig = {
       disabled: true,
     },
     {
-      id: 5,
+      id: 6,
       href: '/dashboard/appearance',
       text: 'appearance',
       translate: 'yes',
       iconName: 'Paintbrush',
     },
     {
-      id: 6,
+      id: 7,
       href: '/dashboard/users',
       text: 'users',
       translate: 'yes',
@@ -75,7 +82,7 @@ export const dashboardConfig: DashboardConfig = {
       ],
     },
     {
-      id: 7,
+      id: 8,
       href: '/dashboard/settings',
       text: 'settings',
       translate: 'yes',
@@ -120,7 +127,7 @@ export const dashboardConfig: DashboardConfig = {
       ],
     },
     {
-      id: 8,
+      id: 9,
       href: '/dashboard/admin',
       text: 'admin',
       translate: 'yes',

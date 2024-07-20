@@ -18,7 +18,7 @@ export function CircleList({ className }: CircleListProps) {
       )}
     >
       <div className="flex items-center justify-between">
-        <div className="text-sm font-medium">Circles</div>
+        <div className="text-sm font-medium">Topics</div>
         <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
           <PlusIcon className="h-4 w-4" />
           <span className="sr-only">New Circle</span>
@@ -26,7 +26,7 @@ export function CircleList({ className }: CircleListProps) {
       </div>
       <div>
         <Input
-          placeholder="Search circles..."
+          placeholder="Search topics..."
           className="h-8 w-full rounded-md bg-background pl-8"
         />
       </div>

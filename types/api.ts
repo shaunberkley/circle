@@ -10,6 +10,8 @@ import {
   User,
   Statistic,
   PostRank,
+  Circle,
+  Message,
 } from '@/types/database'
 
 export type UserAPI =
@@ -71,3 +73,19 @@ export type StatisticsAPI =
 export type CronAPI = { data: null; error: null } | { data: null; error: Error }
 
 export type IpAPI = string
+
+export type CircleAPI =
+  | { data: Circle | null; error: null }
+  | { data: null; error: Error }
+
+export type CirclesAPI =
+  | { data: Circle[]; count: number; error: null }
+  | { data: null; count: null; error: Error }
+
+export type MessageAPI =
+  | { data: Message | null; error: null }
+  | { data: null; error: Error }
+
+export type MessagesAPI =
+  | { data: Message[]; count: number; error: null }
+  | { data: null; count: null; error: Error }

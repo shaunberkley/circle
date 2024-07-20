@@ -47,3 +47,14 @@ export function generateRecentPosts(
 
   return posts
 }
+
+export function generateRecentCircles(user: any, count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    name: `Circle ${i + 1}`,
+    description: `Description for Circle ${i + 1}`,
+    owner_id: user?.id,
+    is_public: false,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  }))
+}

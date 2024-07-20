@@ -25,6 +25,19 @@ const Navigation = () => {
             Posts
           </Link>
         </NavigationMenuLink>
+        <NavigationMenuLink asChild>
+          <Link className="text-sm hover:underline" href={absoluteUrl('/chat')}>
+            Chat
+          </Link>
+        </NavigationMenuLink>
+        <NavigationMenuLink asChild>
+          <Link
+            className="text-sm hover:underline"
+            href={absoluteUrl('/dashboard')}
+          >
+            Dashboard
+          </Link>
+        </NavigationMenuLink>
       </NavigationMenuList>
     </NavigationMenu>
   )
