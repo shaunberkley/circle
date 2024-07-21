@@ -10,8 +10,12 @@ import { ContextBar } from './context-bar'
 import { ChatHeader } from './chat-header'
 
 export interface Message {
-  id: number
+  id: string
   user_id: string
+  user: {
+    id: string
+    full_name: string
+  }
   content: string
   timestamp: Date
 }
@@ -27,6 +31,9 @@ const Chat: React.FC<ChatProps> = ({ circleId, session }) => {
   const [hasNextPage, setHasNextPage] = useState(true)
   const [isNextPageLoading, setIsNextPageLoading] = useState(false)
   const [currentUserSentMessage, setCurrentUserSentMessage] = useState(false)
+  const [lastReadMessageId, setLastReadMessageId] = useState<string | null>(
+    null
+  )
 
   const fetchMessages = useCallback(
     async (before?: string) => {
@@ -65,13 +72,26 @@ const Chat: React.FC<ChatProps> = ({ circleId, session }) => {
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'messages' },
-        (payload) => {
+        async (payload) => {
           const newMessage = payload.new
           console.log('New message received:', newMessage)
           if (newMessage.circle_id === circleId) {
+            let user = newMessage.user
+            if (!user || !user.full_name) {
+              const { data: userData } = await supabase
+                .from('users')
+                .select('id, full_name')
+                .eq('id', newMessage.user_id)
+                .single()
+              user = userData
+            }
             setMessages((prevMessages) => [
               ...prevMessages,
-              { ...newMessage, timestamp: new Date(newMessage.timestamp) },
+              {
+                ...newMessage,
+                user,
+                timestamp: new Date(newMessage.timestamp),
+              },
             ])
           }
         }
@@ -124,6 +144,52 @@ const Chat: React.FC<ChatProps> = ({ circleId, session }) => {
     setIsNextPageLoading(false)
   }
 
+  const fetchLastReadMessage = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `/api/v1/messages/${circleId}/read-status?userId=${session.user.id}`
+      )
+      if (!response.ok) {
+        console.error('Failed to fetch read status')
+        return
+      }
+      const data = await response.json()
+      setLastReadMessageId(data.data?.last_read_message_id || null)
+    } catch (error) {
+      console.error('Error fetching read status:', error)
+    }
+  }, [circleId, session.user.id])
+
+  const updateReadStatus = async (messageId: string) => {
+    try {
+      const response = await fetch(
+        `/api/v1/messages/${circleId}/read-status?userId=${session.user.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lastReadMessageId: messageId,
+            userId: session.user.id,
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        console.error('Error updating read status:', await response.json())
+      } else {
+        setLastReadMessageId(messageId) // Update the state with the new last read message ID
+      }
+    } catch (error) {
+      console.error('Error updating read status:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchLastReadMessage()
+  }, [fetchLastReadMessage])
+
   return (
     <>
       <CircleList className="hidden lg:flex" />
@@ -139,6 +205,8 @@ const Chat: React.FC<ChatProps> = ({ circleId, session }) => {
           hasNextPage={hasNextPage}
           currentUserSentMessage={currentUserSentMessage}
           setCurrentUserSentMessage={setCurrentUserSentMessage}
+          updateReadStatus={updateReadStatus}
+          lastReadMessageId={lastReadMessageId}
         />
         <ChatInput onSendMessage={handleSendMessage} />
       </div>

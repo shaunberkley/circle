@@ -14,7 +14,7 @@ const QuickView = ({ circle }: QuickViewProps) => {
 
   return (
     <Link
-      href={`/circles/${circle?.id}`}
+      href={`/circles/${circle?.id}/chat`}
       className="text-xs text-blue-700 hover:underline dark:text-white"
     >
       {t('view')}

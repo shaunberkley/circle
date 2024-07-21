@@ -14,7 +14,7 @@ export async function GET(
   // Fetch the latest 25 messages for the circle
   const { data: messages, error } = await supabase
     .from('messages')
-    .select('*')
+    .select('*, user:user_id(*)')
     .eq('circle_id', circleId)
     .order('timestamp', { ascending: true })
     .limit(100)
