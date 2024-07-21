@@ -50,25 +50,3 @@ export function useCirclesAPI(
     mutate,
   }
 }
-
-export function useCountCirclesAPI(
-  userId: string | null,
-  params?: { q?: string }
-) {
-  const query = setQueryString({ userId, ...params })
-  const url = query ? `/api/v1/circle/count?${query}` : null
-
-  const { data, error, isLoading, isValidating, mutate } = useSWR<
-    CountCirclesAPI,
-    Error
-  >(url)
-
-  return {
-    data: data?.data ?? null,
-    count: data?.count ?? null,
-    error: error ?? data?.error ?? null,
-    isLoading,
-    isValidating,
-    mutate,
-  }
-}

@@ -90,7 +90,6 @@ const AddDummyCircle = ({
         })
 
         mutate(`/api/v1/circle?userId=${user?.id}`)
-        mutate(`/api/v1/circle/count?${countSearchParams}`)
         mutate(`/api/v1/circle/list?${listSearchParams}`)
       }
     } catch (e: unknown) {

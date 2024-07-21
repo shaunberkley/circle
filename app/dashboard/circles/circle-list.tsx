@@ -28,7 +28,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Circle } from '@/types/database'
 import { useAuth } from '@/hooks/use-auth'
-import { useCirclesAPI, useCountCirclesAPI } from '@/queries/client/circles'
+import { useCirclesAPI } from '@/queries/client/circles'
 import { CheckedState } from '@radix-ui/react-checkbox'
 
 const CircleList = () => {
@@ -92,16 +92,6 @@ interface HeadLinksProps extends React.HTMLAttributes<HTMLDivElement> {}
 const HeadLinks = ({ className, ...props }: HeadLinksProps) => {
   const paging = usePaging()
   const { user } = useAuth()
-  const { data, count } = useCountCirclesAPI(user?.id ?? null, {
-    q: paging?.q,
-  })
-
-  const status: Record<string, number> | undefined = React.useMemo(() => {
-    return data?.reduce((acc: Record<string, number>, curr) => {
-      acc[curr.status] = curr.count
-      return acc
-    }, {})
-  }, [data])
 
   return (
     <div
@@ -111,8 +101,6 @@ const HeadLinks = ({ className, ...props }: HeadLinksProps) => {
       )}
       {...props}
     >
-      <HeadLink status={null} label="all" count={count ?? 0} />
-      <span>|</span>
       <HeadLink status="public" label="public" count={status?.public ?? 0} />
       <span>|</span>
       <HeadLink status="private" label="private" count={status?.private ?? 0} />
