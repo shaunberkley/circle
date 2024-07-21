@@ -1,5 +1,3 @@
-// app/api/v1/read-status/[circleId]/route.ts
-
 import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/supabase/server'
 

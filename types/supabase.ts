@@ -536,6 +536,52 @@ export type Database = {
           },
         ]
       }
+      user_read_status: {
+        Row: {
+          circle_id: string | null
+          id: string
+          last_read_at: string
+          last_read_message_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          circle_id?: string | null
+          id?: string
+          last_read_at?: string
+          last_read_message_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          circle_id?: string | null
+          id?: string
+          last_read_at?: string
+          last_read_message_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'user_read_status_circle_id_fkey'
+            columns: ['circle_id']
+            isOneToOne: false
+            referencedRelation: 'circles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'user_read_status_last_read_message_id_fkey'
+            columns: ['last_read_message_id']
+            isOneToOne: false
+            referencedRelation: 'messages'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'user_read_status_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       usermeta: {
         Row: {
           id: number
