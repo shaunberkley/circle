@@ -56,7 +56,7 @@ export async function POST(
       last_read_message_id: lastReadMessageId,
       last_read_at: new Date().toISOString(),
     },
-    { onConflict: ['user_id', 'circle_id'] }
+    { onConflict: 'user_id,circle_id' }
   )
 
   if (error) {
