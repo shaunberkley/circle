@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/supabase/server'
+import { Database } from '../../../../../../types/supabase'
 
 export async function GET(
   request: NextRequest,
@@ -8,7 +9,7 @@ export async function GET(
   const url = new URL(request.url)
   const userId = url.searchParams.get('userId')
 
-  const supabase = createClient()
+  const supabase = createClient<Database>()
 
   if (!userId) {
     return NextResponse.json(
@@ -39,7 +40,7 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { circleId: string } }
 ) {
-  const supabase = createClient()
+  const supabase = createClient<Database>()
   const { lastReadMessageId, userId } = await request.json()
 
   if (!userId) {
