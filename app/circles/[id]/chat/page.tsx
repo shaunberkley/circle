@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { staticSupabaseClient } from '@/lib/utils/staticSupabaseClient'
 
 import Chat from './components/chat'
@@ -43,7 +43,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const { session } = await getAuth()
 
   if (!authenticated || !session) {
-    notFound()
+    redirect('/auth/signin')
   }
 
   return (
