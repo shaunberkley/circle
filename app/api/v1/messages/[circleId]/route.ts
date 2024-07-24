@@ -33,11 +33,12 @@ export async function POST(
 ) {
   const supabase = createClient()
   const circleId = params.circleId
-  const { error: authError } = await authorize(request)
+
+  const { authorized, user, error: authError } = await authorize(request)
 
   if (authError) {
     return NextResponse.json(
-      { data: null, error: new ApiError(401) },
+      { data: null, error: new ApiError(401, authError) },
       { status: 401 }
     )
   }

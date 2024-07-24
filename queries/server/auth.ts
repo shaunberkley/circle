@@ -29,12 +29,12 @@ export async function authorize(id: string) {
   const { data, error } = await supabase.auth.getUser()
 
   if (error || !data.user) {
-    return { authorized: false, user: null }
+    return { authorized: false, user: null, error }
   }
 
   const user = data.user
 
   return user?.id === id
-    ? { authorized: true, user }
-    : { authorized: false, user: null }
+    ? { authorized: true, user, error: null }
+    : { authorized: false, user: null, error: 'Unauthorized' }
 }
